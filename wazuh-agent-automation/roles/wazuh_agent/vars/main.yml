@@ -1,0 +1,11 @@
+---
+# Installation paths and files - usually constant
+wazuh_install_path: "/var/ossec"
+wazuh_agent_auth_bin: "/var/ossec/bin/agent-auth"
+
+# Marker file path to avoid repeated registration
+wazuh_register_marker: "/var/ossec/.registered_by_ansible"
+
+# Service name - usually constant but safer to keep here than hardcoded
+wazuh_service_name: "wazuh-agent"
+

@@ -1,0 +1,18 @@
+---
+- name: Validate variables and prerequisites
+  import_tasks: validate.yml
+
+- name: Add Wazuh repo and GPG key
+  import_tasks: repo.yml
+
+- name: Install Wazuh agent and dependencies
+  import_tasks: install.yml
+
+- name: Configure agent files
+  import_tasks: config.yml
+
+- name: Register agent to Wazuh manager
+  import_tasks: register.yml
+
+- name: Manage wazuh agent service
+  import_tasks: service.yml

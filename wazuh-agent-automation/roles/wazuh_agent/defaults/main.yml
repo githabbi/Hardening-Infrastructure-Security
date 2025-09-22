@@ -1,0 +1,9 @@
+---
+wazuh_manager_ip: ""            # Must be set in group_vars
+wazuh_manager_port: 1515
+wazuh_repo_url: "https://packages.wazuh.com/4.x/apt/"
+wazuh_repo_components: "stable main"
+wazuh_gpg_key_url: "https://packages.wazuh.com/key/GPG-KEY-WAZUH"
+wazuh_package_name: "wazuh-agent"
+wazuh_service_name: "wazuh-agent"
+wazuh_register_marker: "/var/ossec/.registered_by_ansible"

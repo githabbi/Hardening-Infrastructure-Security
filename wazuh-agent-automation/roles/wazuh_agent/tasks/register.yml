@@ -1,0 +1,33 @@
+---
+- name: Check if agent already registered
+  stat:
+    path: "{{ wazuh_register_marker }}"
+  register: registration_marker
+
+- name: Register agent and create marker if needed (block)
+  block:
+    - name: Register agent with Wazuh manager using agent-auth
+      command: >
+        /var/ossec/bin/agent-auth -m {{ wazuh_manager_ip }} -p {{ wazuh_manager_port }}
+      register: agent_auth_result
+      changed_when: agent_auth_result.rc == 0
+      failed_when: agent_auth_result.rc not in [0, 255]
+
+    - name: Create marker file if registration succeeded
+      file:
+        path: "{{ wazuh_register_marker }}"
+        state: touch
+        owner: root
+        group: root
+        mode: '0644'
+      when: agent_auth_result.rc == 0
+
+    - name: Warn if registration failed
+      debug:
+        msg: >-
+          Wazuh agent registration failed with rc={{ agent_auth_result.rc }}
+          stdout={{ agent_auth_result.stdout | default('') }}
+          stderr={{ agent_auth_result.stderr | default('') }}
+      when: agent_auth_result.rc is defined and agent_auth_result.rc != 0
+
+  when: not registration_marker.stat.exists

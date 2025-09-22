@@ -1,0 +1,18 @@
+---
+- name: Add Wazuh GPG key if URL provided
+  apt_key:
+    url: "{{ wazuh_gpg_key_url }}"
+    state: present
+  when: wazuh_gpg_key_url is defined and wazuh_gpg_key_url != ""
+
+- name: Add Wazuh APT repo if URL provided
+  apt_repository:
+    repo: "deb {{ wazuh_repo_url }} {{ wazuh_repo_components }}"
+    state: present
+    filename: wazuh
+  when: wazuh_repo_url is defined and wazuh_repo_url != ""
+
+- name: Update apt cache if repo was added
+  apt:
+    update_cache: yes
+  when: wazuh_repo_url is defined and wazuh_repo_url != ""

@@ -1,0 +1,10 @@
+---
+  - name: "DEPLOY SSH PUBLIC KEY ON DEBIAN ENDPOINTS"
+    hosts: wazuh_agents
+    tasks:
+      - name: "Deploy SSH public key to the Debian endpoint"
+        authorized_key:
+          user: ansible
+          state: present
+          key: "{{lookup('file','/home/ansible/.ssh/id_ed25519.pub')}}"
+

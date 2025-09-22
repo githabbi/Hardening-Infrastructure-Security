@@ -1,0 +1,17 @@
+---
+- name: Install dependencies required by wazuh-agent
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+    state: present
+    update_cache: yes
+
+- name: Install wazuh-agent package
+  apt:
+    name: "{{ wazuh_package_name }}"
+    state: present
+    update_cache: yes

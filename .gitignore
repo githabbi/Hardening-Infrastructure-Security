@@ -1,0 +1,2 @@
+wazuh-agent-automation/inventory/group_vars/wazuh_agents.yml
+wazuh-agent-automation/inventory/hosts

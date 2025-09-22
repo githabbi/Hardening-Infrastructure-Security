@@ -1,0 +1,6 @@
+---
+- name: Deploy and configure Wazuh agent on all wazuh_agents
+  hosts: wazuh_agents
+  become: yes  # use sudo to run privileged tasks
+  roles:
+    - wazuh_agent

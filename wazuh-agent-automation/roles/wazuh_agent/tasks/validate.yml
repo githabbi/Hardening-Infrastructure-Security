@@ -1,0 +1,7 @@
+---
+- name: Validate wazuh_manager_ip is defined
+  assert:
+    that:
+      - wazuh_manager_ip is defined
+      - wazuh_manager_ip | length > 0
+    fail_msg: "wazuh_manager_ip must be defined (in group_vars or inventory)."

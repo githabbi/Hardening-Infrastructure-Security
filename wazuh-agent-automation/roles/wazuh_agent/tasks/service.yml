@@ -1,0 +1,6 @@
+---
+- name: Ensure wazuh-agent service is enabled and started
+  service:
+    name: "{{ wazuh_service_name }}"
+    enabled: yes
+    state: started
